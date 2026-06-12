@@ -70,7 +70,7 @@ You are free to share and adapt the artwork under the following terms:
 
 - **yanick-th** — Card design, scripting
 - [**koflif**](https://www.pixiv.net/en/users/146727) — Hoshino and Hina artwork
-- *"Studiant"* — Character design, names and art assets property of NEXON America Inc
+- *"Studiant"* — Character design, names and art assets property of NEXON Co.
 - Card frame templates inspired by the Yu-Gi-Oh! TCG, property of Konami Digital Entertainment
 
 ## Contact
