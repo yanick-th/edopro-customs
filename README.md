@@ -4,7 +4,7 @@ Repository of custom cards for Project Ignis: EDOPro.
 - *"Studiant"* — Blue Archive inspired custom archetype
 
 ## Installation
-Add the repository json to your `configs.json` or create the `user_configs.json` file.
+Configure the repository json in your `configs.json` file.
 Add the block inside the `repos` list.
 
 The file is located in the EDOPro config directory at `.../ProjectIgnis/config/` or `.../EDOPro/config/`.
@@ -18,9 +18,9 @@ The file is located in the EDOPro config directory at `.../ProjectIgnis/config/`
             "should_update": true,
             "should_read": true
         },
-        //...
+		//...
     ],
-    //...
+	//...
 }
 ```
 
@@ -28,17 +28,16 @@ Restart EDOPro after adding the repository.
 
 ## Getting started
 
-To view custom cards in the deck editor, check the **"Alternative formats"** checkbox.
+To view custom cards in the EDOPro deck editor, check the **"Alternative formats"** checkbox.
 
 To use a deck containing custom cards, the host must have set **Allowed Cards: Anything goes**.
 
 All players must have the repository installed in order to play with the custom cards.
 
-## ⚠️ Disclaimer
+## Disclaimer
 
 Yu-Gi-Oh! and all related names, card designs, and game mechanics
-are the intellectual property of **Konami Digital Entertainment** and
-**Kazuki Takahashi**. This project is a fan-made, non-commercial work created
+are the intellectual property of Konami Digital Entertainment. This project is a fan-made, non-commercial work created
 for personal and community enjoyment only. No copyright infringement is
 intended.
 
@@ -58,9 +57,9 @@ All original transformative artwork is licensed under
 or visit [creativecommons.org/licenses/by-nc-sa/4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).
 
 You are free to share and adapt the artwork under the following terms:
-- **Attribution** — Credit the original creator
-- **NonCommercial** — No commercial use
-- **ShareAlike** — Derivatives must use the same license
+- Attribution — Credit the original creator
+- NonCommercial — No commercial use
+- ShareAlike — Derivatives must use the same license
 
 > **Note:** This license applies only to original creative contributions made
 > by this project's contributors. It does not and cannot grant any rights over
