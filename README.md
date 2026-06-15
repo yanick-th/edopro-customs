@@ -13,7 +13,7 @@ The file is located in the EDOPro config directory at `.../ProjectIgnis/config/`
 	"repos": [
         {
             "url": "https://github.com/yanick-th/edopro-customs",
-            "repo_name": "yanick-th",
+            "repo_name": "Customs by Yanick",
             "repo_path": "./repositories/yanick-th",
             "should_update": true,
             "should_read": true
