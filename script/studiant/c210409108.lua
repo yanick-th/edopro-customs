@@ -23,9 +23,9 @@ function s.initial_effect(c)
 	e2:SetTargetRange(0,LOCATION_MZONE)
 	e2:SetValue(function(e,c) return not c:IsCode(id) and c:IsRace(RACE_FAIRY) end)
 	c:RegisterEffect(e2)
-	--Lose ATK/DEF and negate
+	--Target this card or 1 face-up monster your opponent controls; Gain DEF or lose ATK/DEF and negate
 	local e3=Effect.CreateEffect(c)
-	e3:SetCategory(CATEGORY_ATKCHANGE+CATEGORY_DEFCHANGE)
+	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetType(EFFECT_TYPE_QUICK_O)
 	e3:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_CARD_TARGET)
 	e3:SetRange(LOCATION_MZONE)
@@ -58,19 +58,38 @@ function s.imtg(e,c)
 end
 
 function s.natg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(1-tp) and chkc:IsFaceup() end
-	if chk==0 then return Duel.IsExistingTarget(Card.IsFaceup,tp,0,LOCATION_MZONE,1,nil) end
+	if chkc then return chkc:IsLocation(LOCATION_MZONE) and s.tgfieldfilter(chkc,e,tp) end
+	if chk==0 then return Duel.IsExistingTarget(s.tgfieldfilter,tp,LOCATION_MZONE,LOCATION_MZONE,1,nil,e,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
-	local g=Duel.SelectTarget(tp,Card.IsFaceup,tp,0,LOCATION_MZONE,1,1,nil)
-	if Card.IsNegatableMonster(g:GetFirst()) then
-		Duel.SetOperationInfo(0,CATEGORY_DISABLE,g,1,0,0)
+	local tc=Duel.SelectTarget(tp,s.tgfieldfilter,tp,LOCATION_MZONE,LOCATION_MZONE,1,1,nil,e,tp):GetFirst()
+	if tc==e:GetHandler() then
+		e:SetCategory(CATEGORY_DEFCHANGE)
+	else
+		e:SetCategory(CATEGORY_ATKCHANGE+CATEGORY_DEFCHANGE)
+		if Card.IsNegatableMonster(tc) then
+			Duel.SetOperationInfo(0,CATEGORY_DISABLE,tc,1,0,0)
+		end
 	end
+end
+function s.tgfieldfilter(c,e,tp)
+	return c==e:GetHandler() or (c:IsFaceup() and c:IsControler(1-tp))
 end
 
 function s.naop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
     local tc=Duel.GetFirstTarget()
-    if tc:IsFaceup() and tc:IsRelateToEffect(e) then
+    if not tc:IsFaceup() or not tc:IsRelateToEffect(e) then return end
+
+	if tc==e:GetHandler() then
+		--Increase DEF
+		local e1=Effect.CreateEffect(c)
+		e1:SetType(EFFECT_TYPE_SINGLE)
+		e1:SetCode(EFFECT_UPDATE_DEFENSE)
+	    e1:SetReset(RESETS_STANDARD_PHASE_END,2)
+		e1:SetValue(300*e:GetLabel())
+		tc:RegisterEffect(e1)
+	else
+		--Decrease ATK/DEF and negate
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_UPDATE_ATTACK)
