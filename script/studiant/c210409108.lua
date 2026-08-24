@@ -85,7 +85,7 @@ function s.naop(e,tp,eg,ep,ev,re,r,rp)
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_UPDATE_DEFENSE)
-	    e1:SetReset(RESETS_STANDARD_PHASE_END,2)
+	    e1:SetReset(RESETS_STANDARD_DISABLE_PHASE_END,2)
 		e1:SetValue(300*e:GetLabel())
 		tc:RegisterEffect(e1)
 	else
