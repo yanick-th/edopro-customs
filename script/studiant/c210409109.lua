@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_IGNITION)
 	e2:SetRange(LOCATION_SZONE)
 	e2:SetCountLimit(4,id)
-	e2:SetCost(s.cost)
+	e2:SetCost(Cost.Replaceable(Cost.Discard()))
 	e2:SetTarget(s.tgtg)
 	e2:SetOperation(s.tgop)
 	c:RegisterEffect(e2)
@@ -53,11 +53,6 @@ function s.tdop(e,tp,eg,ep,ev,re,r,rp)
 			Duel.ConfirmDecktop(tp,1)
 		end
 	end
-end
-
-function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,LOCATION_HAND,0,1,nil) end
-	Duel.DiscardHand(tp,Card.IsDiscardable,1,1,REASON_COST|REASON_DISCARD)
 end
 
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
